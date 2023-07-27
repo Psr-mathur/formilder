@@ -1,6 +1,6 @@
 const ResponseRoute = require("./routes/response");
 const CreateRoute = require("./routes/createform");
-const UploadikRoute = require("./routes/uploadik");
+const UploadikRoute = require("./routes/authik");
 const cors = require("cors");
 const express = require("express");
 

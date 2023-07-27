@@ -8,7 +8,7 @@ export const imagekitupload2 = async (file) => {
 	formData.append("file", file);
 	formData.append("fileName", file.name);
 
-	const tokens = await axios.get(`${BASE_URL}/authimagekit`);
+	const tokens = await axios.get(`${BASE_URL}/api/authimagekit`);
 	// console.log(tokens.data);
 
 	formData.append("signature", tokens.data.signature);
