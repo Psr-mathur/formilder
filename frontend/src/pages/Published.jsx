@@ -26,6 +26,7 @@ const Published = () => {
 		setStatus(`submitting...`);
 		let fileurl = "";
 		if (file) {
+			console.log(file);
 			fileurl = await imagekitupload2(file[0]);
 		}
 		try {
