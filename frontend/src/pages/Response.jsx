@@ -64,7 +64,7 @@ const Response = () => {
 							Loading...
 						</span>
 					</div>
-				) : isError ? (
+				) : error ? (
 					<div className=" flex w-full items-center justify-center h-96">
 						<span className=" max-w-lg text-lg font-bold h-16 text-justify">
 							{error.response.data}

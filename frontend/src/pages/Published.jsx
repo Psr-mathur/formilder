@@ -6,6 +6,7 @@ import Error404 from "./Error404";
 import Servererr from "./Servererr";
 import { useState } from "react";
 import { BASE_URL } from "../Base";
+import { imagekitupload2 } from "../imagekitsetup";
 
 const Published = () => {
 	const location = useLocation();
@@ -13,6 +14,7 @@ const Published = () => {
 	// console.log(publickey);
 	const [resps, setResps] = useState({});
 	const [status, setStatus] = useState(" ");
+	const [file, setFile] = useState(null);
 	const { data, isLoading, isError } = useQuery(["getInputs"], async () => {
 		const res = await axios.get(
 			`${BASE_URL}/api/createform?publickey=${publickey}`
@@ -22,7 +24,12 @@ const Published = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setStatus(`submitting...`);
+		let fileurl = "";
+		if (file) {
+			fileurl = await imagekitupload2(file[0]);
+		}
 		try {
+			submittedData[file[1]] = url;
 			const res = await axios.post(
 				`${BASE_URL}/api/response?key=${publickey}`,
 				{
@@ -36,6 +43,10 @@ const Published = () => {
 		}
 	};
 	const handleRespChange = (e) => {
+		if (e.target.files) {
+			// console.log(e.target.files[0]);
+			setFile([e.target.files[0], e.target.name]);
+		}
 		setResps({ ...resps, [e.target.name]: e.target.value });
 	};
 

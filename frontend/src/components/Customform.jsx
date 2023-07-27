@@ -25,7 +25,7 @@ export const Custominput = ({
 				name={inputtitle}
 				type={selectedType}
 				placeholder={inputPlaceholder}
-				maxLength={parseInt(maxlength)}
+				maxLength={inputtitle == "file" ? 255 : parseInt(maxlength)}
 				required={inputRequired === "true" ? true : false}
 				onChange={handleRespChange}
 				value={value}
