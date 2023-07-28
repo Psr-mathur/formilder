@@ -25,12 +25,14 @@ const Published = () => {
 		e.preventDefault();
 		setStatus(`submitting...`);
 		let fileurl = "";
+		const toSubmit = { ...resps };
 		if (file) {
-			console.log(file);
+			// console.log(file);
 			fileurl = await imagekitupload2(file[0]);
+			toSubmit[file[1]] = fileurl;
 		}
 		try {
-			resps[file[1]] = url;
+			// console.log(toSubmit);
 			const res = await axios.post(
 				`${BASE_URL}/api/response?key=${publickey}`,
 				{
@@ -40,7 +42,7 @@ const Published = () => {
 			setStatus(`Response submitted successfully!`);
 		} catch (error) {
 			// console.log(error.response.data);
-			if (error) setStatus(`${error.response.data}`);
+			if (error && error.response) setStatus(`${error.response.data}`);
 			else setStatus("Some error Occoured. Please try after Sometime.");
 		}
 	};
