@@ -36,7 +36,7 @@ const Published = () => {
 			const res = await axios.post(
 				`${BASE_URL}/api/response?key=${publickey}`,
 				{
-					submittedData: resps,
+					submittedData: toSubmit,
 				}
 			);
 			setStatus(`Response submitted successfully!`);
