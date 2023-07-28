@@ -20,9 +20,11 @@ app.use((req, res, next) => {
 	res.setHeader("Access-Control-Allow-Credentials", true);
 	next();
 });
+const UI_URL = "http://localhost:5173";
+// const UI_URL = "https://formilder.onrender.com";
 app.use(
 	cors({
-		origin: "https://formilder.onrender.com",
+		origin: UI_URL,
 		credentials: true,
 	})
 );
