@@ -1,19 +1,41 @@
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import { BASE_URL } from "../Base";
 
 const Response = () => {
 	const [prikey, setPrikey] = useState("");
-	const [quer, setQuer] = useState("eslaf");
 	const [show, setshow] = useState(false);
-	const { data, isLoading, isError, error } = useQuery(
-		["myData"],
-		async () => {
-			const res = await axios.get(`${BASE_URL}/api/response?key=${quer}`);
-			return res.data;
+	const [resArr, setResArr] = useState({
+		data: [],
+		isLoading: true,
+		error: null,
+	});
+	const fetchResponse = async (key) => {
+		setResArr((prev) => {
+			return {
+				data: [],
+				isLoading: true,
+				error: null,
+			};
+		});
+		try {
+			const resp = await axios.get(`${BASE_URL}/api/response?key=${key}`);
+			setResArr((prev) => {
+				return { ...prev, data: resp.data };
+			});
+			setResArr((prev) => {
+				return { ...prev, isLoading: false };
+			});
+		} catch (error) {
+			setResArr((prev) => {
+				return { ...prev, error: error };
+			});
+			setResArr((prev) => {
+				return { ...prev, isLoading: false };
+			});
 		}
-	);
+	};
+
 	// const data = [
 	// 	{
 	// 		Dob: "2023-07-13",
@@ -28,9 +50,10 @@ const Response = () => {
 	// ];
 	const handlefetch = () => {
 		setshow(true);
-		setQuer((prev) => prikey);
+		// setQuer((prev) => prikey);
+		fetchResponse(prikey);
 	};
-	// console.log(data);
+	// console.log(resArr);
 	return (
 		<div className="pt-16 px-10">
 			<div className=" flex flex-col p-4">
@@ -58,16 +81,16 @@ const Response = () => {
 							fetch data.
 						</span>
 					</div>
-				) : isLoading ? (
+				) : resArr.isLoading ? (
 					<div className=" flex w-full items-center justify-center h-96">
 						<span className=" max-w-lg text-lg font-bold h-16 text-justify">
 							Loading...
 						</span>
 					</div>
-				) : error ? (
+				) : resArr.error ? (
 					<div className=" flex w-full items-center justify-center h-96">
 						<span className=" max-w-lg text-lg font-bold h-16 text-justify">
-							{error.response.data}
+							{resArr.error.response.data}
 						</span>
 					</div>
 				) : (
@@ -76,21 +99,23 @@ const Response = () => {
 							<table className=" w-full border bg-white shadow-md rounded-lg ">
 								<thead className="bg-gray-100">
 									<tr>
-										{Object.keys(data[0]).map((key) => {
-											return (
-												<th
-													className="px-4 py-2"
-													key={key}
-												>
-													{key}
-												</th>
-											);
-										})}
+										{Object.keys(resArr.data[0]).map(
+											(key) => {
+												return (
+													<th
+														className="px-4 py-2"
+														key={key}
+													>
+														{key}
+													</th>
+												);
+											}
+										)}
 									</tr>
 								</thead>
 
 								<tbody className=" min-w-max">
-									{data.map((valObj, index) => {
+									{resArr.data.map((valObj, index) => {
 										return (
 											<tr key={index}>
 												{Object.keys(valObj).map(
@@ -115,7 +140,7 @@ const Response = () => {
 											className="border px-4 py-2"
 											colSpan="3"
 										>
-											Total: {data.length} entries
+											Total: {resArr.data.length} entries
 										</td>
 									</tr>
 								</tfoot>
