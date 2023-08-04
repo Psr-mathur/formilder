@@ -83,15 +83,15 @@ const Taskresponse = () => {
 						</span>
 					</div>
 				) : (
-					<div className=" p-10 border flex items-center justify-center">
+					<div className=" p-10 border flex flex-col items-center justify-center">
 						{resArr.data.map((d, i) => {
 							return (
 								<div>
 									<h1
-										className="text-xl font-bold mb-3"
+										className="text-xl font-bold mb-3 border-b-2"
 										key={i}
 									>
-										{i + 1}
+										{i + 1}.
 									</h1>
 									{d ? (
 										<pre>{JSON.stringify(d, null, 2)}</pre>
