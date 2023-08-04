@@ -142,7 +142,9 @@ const Taskpublished = ({}) => {
 									qnNo={ind + 1}
 									ibArr={val.ibArr}
 									ctgrysArr={val.ctgrysArr}
-									handleChangeResponse={handleChangeResponse}
+									handleChangeResponse={(q, r) =>
+										handleChangeResponse(q, r)
+									}
 								/>
 							);
 						}
@@ -154,7 +156,9 @@ const Taskpublished = ({}) => {
 									sentence={val.sentence}
 									hiddenWords={val.hiddenWords}
 									options={val.options}
-									handleChangeResponse={handleChangeResponse}
+									handleChangeResponse={(q, r) =>
+										handleChangeResponse(q, r)
+									}
 								/>
 							);
 						}
@@ -166,7 +170,9 @@ const Taskpublished = ({}) => {
 									images={val.images}
 									comprehension={val.comprehension}
 									questions={val.questions}
-									handleChangeResponse={handleChangeResponse}
+									handleChangeResponse={(q, r) =>
+										handleChangeResponse(q, r)
+									}
 								/>
 							);
 						}
