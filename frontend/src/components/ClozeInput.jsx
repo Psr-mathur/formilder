@@ -1,6 +1,6 @@
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const replaceWordWithUnderscores = (inputString, wordToReplace) => {
 	const regex = new RegExp(`\\b${wordToReplace}\\b`, "gi");
@@ -126,8 +126,10 @@ export const ClozeInput = ({
 		const answerSen = getAllInnerText(ansEle);
 		// console.log(answerSen);
 		setResponse((prev) => answerSen);
-		handleChangeResponse(qnNo, response);
 	};
+	useEffect(() => {
+		handleChangeResponse(qnNo, response);
+	}, [response]);
 
 	// console.log(response);
 

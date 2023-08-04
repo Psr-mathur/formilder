@@ -1,6 +1,6 @@
 import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Droppable = ({ categ, id }) => {
 	const { isOver, setNodeRef } = useDroppable({
@@ -90,8 +90,10 @@ export const CategorizeInput = ({
 			}
 			return newResponse;
 		});
-		handleChangeResponse(qnNo, response);
 	};
+	useEffect(() => {
+		handleChangeResponse(qnNo, response);
+	}, [response]);
 	// console.log(response);
 	return (
 		<fieldset className=" relative w-full h-fit border group bg-slate-50 p-2">
