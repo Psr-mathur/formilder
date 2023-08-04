@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Question = ({ Q, subQnNo, setResponse, image }) => {
+const Question = ({ Q, subQnNo, handlesetResponse, image }) => {
 	const [selectedOption, setSelectedOption] = useState(null);
 
 	const handleOptionChange = (event) => {
@@ -63,8 +63,7 @@ const ComprehensionInput = ({
 	// console.log(images);
 	// console.log(response);
 	useEffect(() => {
-		if (typeof myFunction === "function")
-			handleChangeResponse(qnNO, response);
+		handleChangeResponse(qnNO, response);
 	}, [response]);
 	return (
 		<fieldset className=" relative w-full h-fit border group bg-slate-50 p-2">

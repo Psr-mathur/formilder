@@ -285,6 +285,7 @@ const Task = () => {
 										ibArr={val.ibArr}
 										ctgrysArr={val.ctgrysArr}
 										qnNo={ind + 1}
+										handleChangeResponse={() => {}}
 									/>
 								);
 							}
@@ -296,6 +297,7 @@ const Task = () => {
 										hiddenWords={val.hiddenWords}
 										options={val.options}
 										qnNo={ind + 1}
+										handleChangeResponse={() => {}}
 									/>
 								);
 							}
@@ -307,6 +309,7 @@ const Task = () => {
 										comprehension={val.comprehension}
 										images={val.images}
 										qnNO={ind + 1}
+										handleChangeResponse={() => {}}
 									/>
 								);
 							}
