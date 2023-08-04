@@ -36,6 +36,20 @@ const Home = () => {
 						View Responses
 					</Link>
 				</div>
+				<div className=" flex gap-10">
+					<Link
+						to="/task"
+						className=" bg-purple-400 text-white font-bold hover:bg-slate-400 hover:text-slate-800 px-7 sm:py-3 rounded-xl transition-all inline-block"
+					>
+						Get Started T
+					</Link>
+					<Link
+						to="/taskresponse"
+						className=" bg-purple-400 text-white font-bold hover:bg-slate-400 hover:text-slate-800 px-7 sm:py-3 rounded-xl transition-all inline-block"
+					>
+						View Responses T
+					</Link>
+				</div>
 				<p className="text-lg text-slate-500 font-thin max-w-3xl text-justify italic my-10">
 					Create unlimited forms without breaking the bank! Formilder
 					offers a powerful and free form builder that puts the

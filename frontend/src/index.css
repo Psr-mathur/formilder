@@ -31,3 +31,13 @@
 	background-color: darkgrey;
 	outline: 1px solid slategrey;
 }
+.minwidth {
+	width: fit-content;
+	min-width: 50px;
+}
+.headpic {
+	max-width: 300px;
+	max-height: 300px;
+	background-size: cover;
+	background-position: center;
+}
