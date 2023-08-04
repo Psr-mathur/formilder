@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Question = ({ Q, subQnNo, handlesetResponse, image }) => {
+const Question = ({ Q, subQnNo, setResponse, image }) => {
 	const [selectedOption, setSelectedOption] = useState(null);
 
 	const handleOptionChange = (event) => {
