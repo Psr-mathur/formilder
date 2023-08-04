@@ -63,7 +63,8 @@ const ComprehensionInput = ({
 	// console.log(images);
 	// console.log(response);
 	useEffect(() => {
-		handleChangeResponse(qnNO, response);
+		if (typeof myFunction === "function")
+			handleChangeResponse(qnNO, response);
 	}, [response]);
 	return (
 		<fieldset className=" relative w-full h-fit border group bg-slate-50 p-2">

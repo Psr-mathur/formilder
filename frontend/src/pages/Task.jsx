@@ -153,7 +153,7 @@ const Task = () => {
 		// console.log(demo);
 		uploadToDatabase({ demo, pub, priv });
 	};
-	console.log(demo);
+	// console.log(demo);
 	return (
 		<div className=" pt-16 ">
 			<div className=" pt-5 pb-5 w-full flex items-start justify-between gap-3 px-10">
