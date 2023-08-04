@@ -1,6 +1,8 @@
 const ResponseRoute = require("./routes/response");
 const CreateRoute = require("./routes/createform");
 const UploadikRoute = require("./routes/authik");
+const TaskResproute = require("./routes/taskresponse");
+const TaskRoute = require("./routes/createtask").router;
 const cors = require("cors");
 const express = require("express");
 
@@ -33,3 +35,5 @@ app.use(express.json());
 app.use("/api/authimagekit", UploadikRoute);
 app.use("/api/response", ResponseRoute);
 app.use("/api/createform", CreateRoute);
+app.use("/api/createtask", TaskRoute);
+app.use("/api/taskresponse", TaskResproute);
