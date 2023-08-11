@@ -135,9 +135,7 @@ export const ClozeInput = ({
 
 	return (
 		<fieldset className="relative w-full h-fit border group bg-slate-50 px-2">
-			<legend className="text-lg mb-2 ">
-				{qnNo}. Fill in the blanks.
-			</legend>
+			<legend className="text-lg mb-2 ">Fill in the blanks.</legend>
 			<DndContext onDragEnd={handleDragEnd}>
 				<div className="relative w-full h-fit py-3">
 					<div className="flex items-center justify-center  gap-3 flex-wrap">

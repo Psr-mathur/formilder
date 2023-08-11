@@ -24,32 +24,33 @@ const Home = () => {
 				</p>
 				<div className=" flex gap-10">
 					<Link
-						to="/createform"
-						className=" bg-purple-400 text-white font-bold hover:bg-slate-400 hover:text-slate-800 px-7 sm:py-3 rounded-xl transition-all inline-block"
-					>
-						Get Started
-					</Link>
-					<Link
-						to="/response"
-						className=" bg-purple-400 text-white font-bold hover:bg-slate-400 hover:text-slate-800 px-7 sm:py-3 rounded-xl transition-all inline-block"
-					>
-						View Responses
-					</Link>
-				</div>
-				<div className=" flex gap-10">
-					<Link
 						to="/task"
 						className=" bg-purple-400 text-white font-bold hover:bg-slate-400 hover:text-slate-800 px-7 sm:py-3 rounded-xl transition-all inline-block"
 					>
-						Get Started T
+						Get Started v2
 					</Link>
 					<Link
 						to="/taskresponse"
 						className=" bg-purple-400 text-white font-bold hover:bg-slate-400 hover:text-slate-800 px-7 sm:py-3 rounded-xl transition-all inline-block"
 					>
-						View Responses T
+						View Responses v2
 					</Link>
 				</div>
+				<div className=" flex gap-10">
+					<Link
+						to="/createform"
+						className=" bg-purple-400 text-white font-bold hover:bg-slate-400 hover:text-slate-800 px-7 sm:py-3 rounded-xl transition-all inline-block"
+					>
+						Get Started v1
+					</Link>
+					<Link
+						to="/response"
+						className=" bg-purple-400 text-white font-bold hover:bg-slate-400 hover:text-slate-800 px-7 sm:py-3 rounded-xl transition-all inline-block"
+					>
+						View Responses v1
+					</Link>
+				</div>
+
 				<p className="text-lg text-slate-500 font-thin max-w-3xl text-justify italic my-10">
 					Create unlimited forms without breaking the bank! Formilder
 					offers a powerful and free form builder that puts the

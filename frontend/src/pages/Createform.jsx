@@ -79,9 +79,9 @@ const Createform = () => {
 	};
 	return (
 		<div className=" pt-16 ">
-			<div className=" pt-5 pb-5 w-full flex items-start justify-between gap-3 px-10">
+			<div className=" pt-5 pb-5 w-full flex items-start justify-between gap-3 px-5 xl:px-10">
 				<div className=" order-1 w-1/3 shadow h-screen overflow-y-scroll no-scrollbar">
-					<div className=" px-14 py-10 flex flex-col gap-3 items-center">
+					<div className=" px-5 xl:px-14 py-10 flex flex-col gap-3 items-center">
 						<div className=" relative w-full h-fit border flex flex-col gap-5 items-center justify-center p-3 mb-10">
 							<textarea
 								name="headtitle"
@@ -227,7 +227,7 @@ const Createform = () => {
 								onChange={handleDatachange}
 							/>
 						</div>
-						<div>
+						<div className=" pb-16">
 							<button
 								className=" bg-slate-700 text-white font-semibold hover:bg-slate-400 hover:text-slate-800 px-6 sm:py-2 rounded-xl mx-8 transition-all"
 								onClick={handleInsert}
@@ -280,9 +280,11 @@ const Createform = () => {
 							return <Custominput key={index} {...val} />;
 						})}
 						<div>
-							<button className=" bg-slate-700 text-white font-semibold hover:bg-slate-400 hover:text-slate-800 px-6 sm:py-2 rounded-xl mx-8 transition-all">
-								Submit
-							</button>
+							<abbr title="This is just for demo purpose.">
+								<button className=" bg-slate-700 text-white font-semibold hover:bg-slate-400 hover:text-slate-800 px-6 sm:py-2 rounded-xl mx-8 transition-all">
+									Submit
+								</button>
+							</abbr>
 						</div>
 					</div>
 				</div>

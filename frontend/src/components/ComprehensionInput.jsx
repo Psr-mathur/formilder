@@ -13,9 +13,7 @@ const Question = ({ Q, subQnNo, setResponse, image }) => {
 	// console.log(Q);
 	return (
 		<div className="p-4 border border-red-200">
-			<h1 className="text-lg font-semibold mb-3">
-				{subQnNo}. {Q.question}
-			</h1>
+			<h1 className="text-lg font-semibold mb-3">{Q.question}</h1>
 			{image && image.url && (
 				<div className=" flex items-center justify-center">
 					<img
@@ -67,7 +65,7 @@ const ComprehensionInput = ({
 	}, [response]);
 	return (
 		<fieldset className=" relative w-full h-fit border group bg-slate-50 p-2">
-			<legend>{qnNO}. Comprehension</legend>
+			<legend className="text-lg mb-2 "> Comprehension</legend>
 			<div className=" bg-rose-50 p-2">{comprehension}</div>
 			<div className="">
 				{questions.map((Q, ind) => {

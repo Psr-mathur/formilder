@@ -7,7 +7,8 @@ const Droppable = ({ categ, id }) => {
 		id: id,
 	});
 	const style = {
-		opacity: isOver ? 1 : 0.8,
+		// opacity: isOver ? 1 : 0.8,
+		backgroundColor: isOver ? "#6ecbfa" : "#b4f3fa",
 	};
 
 	return (
@@ -17,10 +18,12 @@ const Droppable = ({ categ, id }) => {
 			key={id}
 			className=" flex flex-col items-center justify-center"
 		>
-			<h2 className=" bg-slate-200 w-32 text-center">{categ}</h2>
+			<h2 className=" bg-slate-200 w-32 text-center font-semibold">
+				{categ}
+			</h2>
 			<div
 				id={id}
-				className=" h-40 w-32 bg-pink-200 flex flex-col items-center gap-2"
+				className=" h-40 w-32  flex flex-col items-center gap-2"
 				tocheck="fordroppingelementfromonetoanother"
 			></div>
 		</div>
@@ -98,7 +101,7 @@ export const CategorizeInput = ({
 	return (
 		<fieldset className=" relative w-full h-fit border group bg-slate-50 p-2">
 			<legend className="text-lg mb-2 ">
-				{qnNo}. Catergorize the Following :
+				Catergorize the Following :
 			</legend>
 			<DndContext onDragEnd={handleDragEnd}>
 				<div className="flex items-center justify-center  gap-3 flex-wrap">
@@ -112,7 +115,7 @@ export const CategorizeInput = ({
 						);
 					})}
 				</div>
-				<div className="grid grid-cols-3 mt-3 gap-3">
+				<div className="flex flex-wrap gap-5 justify-around mt-5">
 					{ctgrysArr.map((categ, ind) => {
 						return (
 							<Droppable

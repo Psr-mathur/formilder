@@ -12,6 +12,7 @@ import {
 	SavedResponseInitialState,
 	SavedResponseReducer,
 } from "../Reducer/SavedResponseReducer";
+import NormalInput from "../components/NormalInput";
 
 const Taskpublished = ({}) => {
 	const [status, setStatus] = useState(" ");
@@ -37,58 +38,6 @@ const Taskpublished = ({}) => {
 			},
 		});
 	};
-
-	// const demodata = {
-	// 	head: {
-	// 		title: "",
-	// 		description: "",
-	// 		file: null,
-	// 		url: null,
-	// 	},
-	// 	allqns: [
-	// 		{
-	// 			type: 0,
-	// 			ctgrysArr: ["1", "11", "111", "1111"],
-	// 			ibArr: [
-	// 				{ item: "item1", bto: "1" },
-	// 				{ item: "item11", bto: "11" },
-	// 				{ item: "item111", bto: "111" },
-	// 			],
-	// 		},
-	// 		{
-	// 			type: 0,
-	// 			ctgrysArr: ["1", "11", "111", "1111"],
-	// 			ibArr: [
-	// 				{ item: "item1", bto: "1" },
-	// 				{ item: "item11", bto: "11" },
-	// 				{ item: "item111", bto: "111" },
-	// 			],
-	// 		},
-	// 		{
-	// 			type: 1,
-	// 			sentence: "My name is prakash. im from patna.",
-	// 			hiddenWords: ["is", "Patna"],
-	// 			options: ["goa", "is", "are", "Patna"],
-	// 		},
-	// 		{
-	// 			type: 2,
-	// 			comprehension: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident incidunt hic doloremque voluptatum, recusandae debitis soluta aliquam totam esse dolorem qui obcaecati fugit saepe quidem, veritatis commodi atque. Quaerat, deserunt!`,
-	// 			images: [{}, {}],
-	// 			questions: [
-	// 				{
-	// 					option: "cat",
-	// 					question: "What do you think?",
-	// 					options: ["dog", "horse", "cow", "cat"],
-	// 				},
-	// 				{
-	// 					option: "cat",
-	// 					question: "What do you think2?",
-	// 					options: ["dog", "horse", "cow", "cat"],
-	// 				},
-	// 			],
-	// 		},
-	// 	],
-	// };
 
 	const handleSubmitResponse = async (e) => {
 		e.preventDefault();
@@ -120,11 +69,11 @@ const Taskpublished = ({}) => {
 				<Servererr />
 			) : data[0] && data[0].data.head ? (
 				<form className=" h-full overflow-scroll no-scrollbar container max-w-3xl flex flex-col gap-6 border border-green-200 shadow">
-					<div className=" flex flex-col items-center justify-center p-3 gap-2 shadow">
-						<h1 className=" text-2xl font-bold">
+					<div className=" flex flex-col items-center justify-center p-3 gap-2 shadow bg-lime-50">
+						<h1 className=" text-2xl font-bold text-justify">
 							{data[0].data.head.title}
 						</h1>
-						<p className=" font-thin text-base">
+						<p className=" font-thin text-base text-justify">
 							{data[0].data.head.description}
 						</p>
 						{data[0].data.head.url && (
@@ -176,8 +125,20 @@ const Taskpublished = ({}) => {
 								/>
 							);
 						}
+						if (val.type == 3) {
+							return (
+								<NormalInput
+									key={ind}
+									qnNO={ind + 1}
+									{...val}
+									handleChangeResponse={(q, r) =>
+										handleChangeResponse(q, r)
+									}
+								/>
+							);
+						}
 					})}
-					<div className=" flex flex-col items-center justify-center gap-3">
+					<div className=" flex flex-col items-center justify-center gap-3 pb-14">
 						<span className=" text-xs font-medium text-fuchsia-600">
 							{status}
 						</span>

@@ -26,6 +26,11 @@ export const DemoReducer = (state, action) => {
 			newhead.file = action.payload.file;
 			newhead.url = action.payload.url;
 			return { ...state, head: newhead };
+		case "DELETE":
+			const index = parseInt(action.payload.index);
+			newallqns = [...state.allqns];
+			newallqns.splice(index, 1);
+			return { ...state, allqns: newallqns };
 		default:
 			return state;
 	}

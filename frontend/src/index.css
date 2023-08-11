@@ -41,3 +41,15 @@
 	background-size: cover;
 	background-position: center;
 }
+
+.wid40 {
+	width: 40%;
+	min-width: 29rem;
+}
+.wid60 {
+	width: 60%;
+}
+.bottom-top10per {
+	bottom: 10%;
+	top: 10%;
+}

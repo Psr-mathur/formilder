@@ -16,9 +16,12 @@ import ShortUniqueId from "short-unique-id";
 import { BASE_UI_URL, BASE_URL } from "../Base";
 import { imagekitupload2 } from "../imagekitsetup";
 import axios from "axios";
+import Normal from "../components/Normal";
+import { NormalIS, NormalReducer } from "../Reducer/NormalReducer";
+import NormalInput from "../components/NormalInput";
 
-const toqArr = ["Categorize", "Cloze", "Comprehension"];
-const toqComp = [<Categorize />, <Cloze />, <Comprehension />];
+const toqArr = ["Categorize", "Cloze", "Comprehension", "Normal"];
+const toqComp = [<Categorize />, <Cloze />, <Comprehension />, <Normal />];
 
 const Task = () => {
 	const uid = new ShortUniqueId();
@@ -27,6 +30,7 @@ const Task = () => {
 	const { getstate: clozestate, resetCloze } = useContext(ClozeContext);
 	const { getstate: compstate, resetCompr } =
 		useContext(ComprehensionContext);
+	const [normstate, normDispatch] = useReducer(NormalReducer, NormalIS);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [para, setpara] = useState(["Your form will look like this..."]);
@@ -42,6 +46,7 @@ const Task = () => {
 	// console.log(selectedQnTypeInd);
 
 	const [demo, demoDispatch] = useReducer(DemoReducer, demoIS);
+	console.log(demo);
 
 	const handleDemoInsert = (e) => {
 		// console.log("ins", selectedQnTypeInd);
@@ -77,8 +82,21 @@ const Task = () => {
 				},
 			});
 			resetCompr();
+		} else if (selectedQnTypeInd == 3) {
+			demoDispatch({
+				type: "INSERT_TO_DEMO",
+				payload: {
+					type: 3,
+					...normstate,
+				},
+			});
+			normDispatch({
+				type: "RESET",
+			});
 		}
 	};
+
+	// console.log(demo);
 
 	const handleChangeHeadTD = (e) => {
 		demoDispatch({
@@ -153,14 +171,24 @@ const Task = () => {
 		// console.log(demo);
 		uploadToDatabase({ demo, pub, priv });
 	};
+
+	const handleDemoQnDelete = (qnNO) => {
+		// console.log(qnNO);
+		demoDispatch({
+			type: "DELETE",
+			payload: {
+				index: qnNO - 1,
+			},
+		});
+	};
 	// console.log(demo);
 	return (
 		<div className=" pt-16 ">
-			<div className=" pt-5 pb-5 w-full flex items-start justify-between gap-3 px-10">
-				<div className=" order-1 w-1/3 shadow h-screen overflow-y-scroll no-scrollbar">
+			<div className=" pt-5 pb-5 w-full flex items-start justify-between gap-3 px-5 xl:px-10">
+				<div className=" order-1 wid40 shadow h-screen overflow-y-scroll no-scrollbar">
 					{isOpen && (
-						<div className="fixed inset-0 flex items-center justify-start bg-black bg-opacity-50 px-10">
-							<div className="flex flex-col gap-3 bg-slate-100 rounded-lg p-8 h-3/4 w-1/3">
+						<div className="fixed inset-0 flex items-center justify-start bg-black bg-opacity-50 px-10 z-50">
+							<div className="flex flex-col gap-3 bg-slate-100 rounded-lg p-8 h-3/4 wid40">
 								<input
 									type="text"
 									name="title"
@@ -192,7 +220,7 @@ const Task = () => {
 							</div>
 						</div>
 					)}
-					<div className=" flex bg-slate-500 h-14 items-center justify-around">
+					<div className=" flex bg-slate-500 h-14 items-center justify-around px-1">
 						<label
 							className=" font-semibold text-white"
 							htmlFor="toq"
@@ -221,7 +249,15 @@ const Task = () => {
 							Set Header
 						</button>
 					</div>
-					{toqComp[selectedQnTypeInd]}
+					{selectedQnTypeInd == 0 && <Categorize />}
+					{selectedQnTypeInd == 1 && <Cloze />}
+					{selectedQnTypeInd == 2 && <Comprehension />}
+					{selectedQnTypeInd == 3 && (
+						<Normal
+							normstate={normstate}
+							normDispatch={normDispatch}
+						/>
+					)}
 					<div className=" flex items-center justify-center p-3">
 						<button
 							className=" bg-slate-700 text-white font-semibold hover:bg-slate-400 hover:text-slate-800 px-6 sm:py-2 rounded-xl mx-8 transition-all"
@@ -232,7 +268,7 @@ const Task = () => {
 					</div>
 				</div>
 
-				<div className=" order-2 w-2/3 shadow">
+				<div className=" order-2 wid60 shadow">
 					<div className=" px-14 py-10 flex flex-col gap-3 items-center">
 						<div className=" w-full flex items-center justify-between">
 							<div className=" font-thin pl-3">
@@ -280,37 +316,95 @@ const Task = () => {
 						{demo.allqns.map((val, ind) => {
 							if (val.type == 0) {
 								return (
-									<CategorizeInput
+									<div
 										key={ind}
-										ibArr={val.ibArr}
-										ctgrysArr={val.ctgrysArr}
-										qnNo={ind + 1}
-										handleChangeResponse={() => {}}
-									/>
+										className=" flex w-full items-center justify-center"
+									>
+										<CategorizeInput
+											ibArr={val.ibArr}
+											ctgrysArr={val.ctgrysArr}
+											qnNo={ind + 1}
+											handleChangeResponse={() => {}}
+										/>
+										<div
+											onClick={() =>
+												handleDemoQnDelete(ind + 1)
+											}
+											className=" ml-1 w-6 h-6 rounded-full bg-red-500 text-white font-bold text-center cursor-pointer"
+										>
+											X
+										</div>
+									</div>
 								);
 							}
 							if (val.type == 1) {
 								return (
-									<ClozeInput
+									<div
 										key={ind}
-										sentence={val.sentence}
-										hiddenWords={val.hiddenWords}
-										options={val.options}
-										qnNo={ind + 1}
-										handleChangeResponse={() => {}}
-									/>
+										className=" flex w-full items-center justify-center"
+									>
+										<ClozeInput
+											sentence={val.sentence}
+											hiddenWords={val.hiddenWords}
+											options={val.options}
+											qnNo={ind + 1}
+											handleChangeResponse={() => {}}
+										/>
+										<div
+											onClick={() =>
+												handleDemoQnDelete(ind + 1)
+											}
+											className=" ml-1 w-6 h-6 rounded-full bg-red-500 text-white font-bold text-center cursor-pointer"
+										>
+											X
+										</div>
+									</div>
 								);
 							}
 							if (val.type == 2) {
 								return (
-									<ComprehensionInput
+									<div
 										key={ind}
-										questions={val.questions}
-										comprehension={val.comprehension}
-										images={val.images}
-										qnNO={ind + 1}
-										handleChangeResponse={() => {}}
-									/>
+										className=" flex w-full items-center justify-center"
+									>
+										<ComprehensionInput
+											questions={val.questions}
+											comprehension={val.comprehension}
+											images={val.images}
+											qnNO={ind + 1}
+											handleChangeResponse={() => {}}
+										/>
+										<div
+											onClick={() =>
+												handleDemoQnDelete(ind + 1)
+											}
+											className=" ml-1 w-6 h-6 rounded-full bg-red-500 text-white font-bold text-center cursor-pointer"
+										>
+											X
+										</div>
+									</div>
+								);
+							}
+							if (val.type == 3) {
+								return (
+									<div
+										key={ind}
+										className=" flex w-full items-center justify-center"
+									>
+										<NormalInput
+											qnNO={ind + 1}
+											{...val}
+											handleChangeResponse={() => {}}
+										/>
+										<div
+											onClick={() =>
+												handleDemoQnDelete(ind + 1)
+											}
+											className=" ml-1 w-6 h-6 rounded-full bg-red-500 text-white font-bold text-center cursor-pointer"
+										>
+											X
+										</div>
+									</div>
 								);
 							}
 						})}
